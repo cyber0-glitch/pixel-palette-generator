@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pixel Palette Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Pixel Palette Generator</h1>
+      <p>Create colorful pixel art by sampling from curated or custom palettes.</p>
+    </header>
+    <main>
+      <section class="controls">
+        <h2>Generate an image</h2>
+        <form id="generator-form">
+          <div class="field">
+            <label for="size-input">Size (WIDTHxHEIGHT)</label>
+            <input
+              type="text"
+              id="size-input"
+              name="size"
+              required
+              value="512x512"
+              autocomplete="off"
+              placeholder="512x512"
+            />
+          </div>
+          <div class="field">
+            <label for="mode-select">Mode</label>
+            <select id="mode-select" name="mode" required>
+              <option value="random" selected>Random (built-in palettes)</option>
+              <option value="custom">Custom colors</option>
+            </select>
+          </div>
+          <fieldset id="palette-fieldset" class="field">
+            <legend>Palette</legend>
+            <label>
+              <input type="radio" name="palette" value="bw" checked /> Black &amp; White
+            </label>
+            <label>
+              <input type="radio" name="palette" value="grayscale" /> Grayscale
+            </label>
+            <label>
+              <input type="radio" name="palette" value="all" /> Full Spectrum
+            </label>
+          </fieldset>
+          <div class="field" id="colors-field" hidden>
+            <label for="colors-input">Custom colors (comma-separated HEX)</label>
+            <input
+              type="text"
+              id="colors-input"
+              name="colors"
+              placeholder="#ff0000,#00ff00,#0000ff"
+            />
+          </div>
+          <div class="field">
+            <label for="seed-input">Seed (optional)</label>
+            <input type="number" id="seed-input" name="seed" placeholder="42" />
+          </div>
+          <div class="field buttons">
+            <button type="submit" id="generate-btn">Generate</button>
+            <button type="button" id="cancel-btn" disabled>Cancel</button>
+            <button type="button" id="download-btn" disabled>Download PNG</button>
+          </div>
+        </form>
+        <div id="messages" role="status" aria-live="polite"></div>
+      </section>
+      <section class="preview">
+        <h2>Preview</h2>
+        <canvas id="preview-canvas" width="256" height="256" aria-label="Generated preview"></canvas>
+        <p id="progress-text">No image yet.</p>
+      </section>
+    </main>
+    <footer>
+      <p>
+        Built with vanilla HTML, CSS, and JavaScript. Deterministic when a seed is supplied.
+      </p>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
